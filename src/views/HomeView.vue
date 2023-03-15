@@ -1,35 +1,42 @@
 <template>
   <div class="root">
-    <NameCard :class="classNameCard"
-      AvatarUrl="https://img1.imgtp.com/2023/03/15/Yu7q4P8x.jpg"
-      AvatarSize="100px"
-      Name="YUPAN ZHAO"
-      Description="Huizhou University"
-      :IconGroup="iconGroup" />
-    <div :class="classMenu">
-      <MenuItem :class="classMenuItem"
-        MenuName="最近文章1"
-        :Items="menuItems_One" />
-      <MenuItem :class="classMenuItem"
-        MenuName="最近文章2"
-        :Items="menuItems_Two" />
-      <MenuItem :class="classMenuItem"
-        MenuName="最近文章3"
-        :Items="menuItems_Three" />
-      <MenuItem :class="classMenuItem"
-        MenuName="最近文章4"
-        :Items="menuItems_Four" />
-    </div>
+    <home-page-anima>
+      <NameCard :class="classNameCard" v-if="isSingleHomePage"
+        AvatarUrl="https://img1.imgtp.com/2023/03/15/Yu7q4P8x.jpg"
+        AvatarSize="100px"
+        Name="YUPAN ZHAO"
+        Description="Huizhou University"
+        :IconGroup="iconGroup" />
+    </home-page-anima>
+    <home-page-anima>
+      <div :class="classMenu" v-if="isSingleHomePage">
+        <MenuItem :class="classMenuItem"
+          MenuName="最近文章1"
+          :Items="menuItems_One" />
+        <MenuItem :class="classMenuItem"
+          MenuName="最近文章2"
+          :Items="menuItems_Two" />
+        <MenuItem :class="classMenuItem"
+          MenuName="最近文章3"
+          :Items="menuItems_Three" />
+        <MenuItem :class="classMenuItem"
+          MenuName="最近文章4"
+          :Items="menuItems_Four" />
+      </div>
+    </home-page-anima>
+    
   </div>
 </template>
 
 <script>
 import NameCard from '../components/NameCard.vue'
 import MenuItem from '../components/MenuItem.vue'
+import HomePageAnima from '../components/animate/HomePageAnima.vue'
 export default {
   components: {
     NameCard,
     MenuItem,
+    HomePageAnima,
   },
   data() {
     return {
@@ -55,7 +62,7 @@ export default {
         {
           name: "基于 RTMP 协议实现的家庭监控系统",
           handle: () => {
-            console.log("clicked");
+            this.isSingleHomePage = !this.isSingleHomePage;
           },
         },
         {
@@ -110,6 +117,7 @@ export default {
           name: "📝记账APP",
         },
       ],
+      isSingleHomePage: true,
     }
   },
   computed: {
