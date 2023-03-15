@@ -1,30 +1,38 @@
 <template>
   <div class="root">
-    <home-page-anima>
-      <NameCard :class="classNameCard" v-if="isSingleHomePage"
+    <div class="root-SingleHomePage">
+      <home-page-anima>
+        <NameCard :class="classNameCard" v-if="isSingleHomePage"
+          AvatarUrl="https://img1.imgtp.com/2023/03/15/Yu7q4P8x.jpg"
+          AvatarSize="100px"
+          Name="YUPAN ZHAO"
+          Description="Huizhou University"
+          :IconGroup="iconGroup" />
+      </home-page-anima>
+      <home-page-anima>
+        <div :class="classMenu" v-if="isSingleHomePage">
+          <MenuItem :class="classMenuItem"
+            MenuName="最近文章1"
+            :Items="menuItems_One" />
+          <MenuItem :class="classMenuItem"
+            MenuName="最近文章2"
+            :Items="menuItems_Two" />
+          <MenuItem :class="classMenuItem"
+            MenuName="最近文章3"
+            :Items="menuItems_Three" />
+          <MenuItem :class="classMenuItem"
+            MenuName="最近文章4"
+            :Items="menuItems_Four" />
+        </div>
+      </home-page-anima>
+    </div>
+    <navigation-anima>
+      <Navigation class="Navigation" v-if="!isSingleHomePage"
         AvatarUrl="https://img1.imgtp.com/2023/03/15/Yu7q4P8x.jpg"
-        AvatarSize="100px"
-        Name="YUPAN ZHAO"
-        Description="Huizhou University"
-        :IconGroup="iconGroup" />
-    </home-page-anima>
-    <home-page-anima>
-      <div :class="classMenu" v-if="isSingleHomePage">
-        <MenuItem :class="classMenuItem"
-          MenuName="最近文章1"
-          :Items="menuItems_One" />
-        <MenuItem :class="classMenuItem"
-          MenuName="最近文章2"
-          :Items="menuItems_Two" />
-        <MenuItem :class="classMenuItem"
-          MenuName="最近文章3"
-          :Items="menuItems_Three" />
-        <MenuItem :class="classMenuItem"
-          MenuName="最近文章4"
-          :Items="menuItems_Four" />
-      </div>
-    </home-page-anima>
-    
+        AvatarSize="36px"
+        Name="YUPAN ZHAO' BLOG"
+        :BackToHomeHandle=backToHome />
+    </navigation-anima>
   </div>
 </template>
 
@@ -32,11 +40,15 @@
 import NameCard from '../components/NameCard.vue'
 import MenuItem from '../components/MenuItem.vue'
 import HomePageAnima from '../components/animate/HomePageAnima.vue'
+import Navigation from '../components/Navigation.vue'
+import NavigationAnima from '../components/animate/NavigationAnima.vue'
 export default {
   components: {
     NameCard,
     MenuItem,
     HomePageAnima,
+    Navigation,
+    NavigationAnima,
   },
   data() {
     return {
@@ -139,6 +151,9 @@ export default {
       this.screenWidth = window.innerWidth;
       this.screenHeight = window.innerHeight;
     },
+    backToHome() {
+      this.isSingleHomePage = true;
+    }
   },
   mounted() {
     this.windowSizeChange();
@@ -159,12 +174,16 @@ export default {
 }
 </script>
 
-<style>
-.root {
+<style scoped>
+.root-SingleHomePage {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
+}
+.root {
+  width: 100%;
+  height: 100%;
 }
 .NameCard-Phone {
   width: fit-content;
@@ -204,5 +223,13 @@ export default {
 }
 .MenuItem {
   width: fit-content;
+}
+.Navigation {
+  width: 100%;
+  height: 54px;
+  position: fixed;
+  top: 0px;
+  background-color: white;
+  box-shadow: 0px 0px 10px #c9c9c9;
 }
 </style>
