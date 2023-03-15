@@ -54,6 +54,9 @@ export default {
       menuItems_One: [
         {
           name: "基于 RTMP 协议实现的家庭监控系统",
+          handle: () => {
+            console.log("clicked");
+          },
         },
         {
           name: "C++ 学习笔记",
