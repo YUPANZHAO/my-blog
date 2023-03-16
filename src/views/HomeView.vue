@@ -31,7 +31,9 @@
         AvatarUrl="https://img1.imgtp.com/2023/03/15/Yu7q4P8x.jpg"
         AvatarSize="36px"
         Name="YUPAN ZHAO' BLOG"
-        :BackToHomeHandle=backToHome />
+        :BackToHomeHandle=backToHome
+        :Menus="allMenuItems"
+        :isPhone="isPhone" />
     </navigation-anima>
   </div>
 </template>
@@ -79,6 +81,9 @@ export default {
         },
         {
           name: "C++ 学习笔记",
+          handle: () => {
+            console.log("handle2");
+          },
         },
         {
           name: "三国杀华容道",
@@ -90,9 +95,15 @@ export default {
       menuItems_Two: [
         {
           name: "基于 RTMP 协议实现的家庭监控系统",
+          handle: () => {
+            this.isSingleHomePage = !this.isSingleHomePage;
+          },
         },
         {
           name: "C++ 学习笔记",
+          handle: () => {
+            console.log("handle2");
+          },
         },
         {
           name: "三国杀华容道",
@@ -104,9 +115,15 @@ export default {
       menuItems_Three: [
         {
           name: "基于 RTMP 协议实现的家庭监控系统",
+          handle: () => {
+            this.isSingleHomePage = !this.isSingleHomePage;
+          },
         },
         {
           name: "C++ 学习笔记",
+          handle: () => {
+            console.log("handle2");
+          },
         },
         {
           name: "三国杀华容道",
@@ -118,9 +135,15 @@ export default {
       menuItems_Four: [
         {
           name: "基于 RTMP 协议实现的家庭监控系统",
+          handle: () => {
+            this.isSingleHomePage = !this.isSingleHomePage;
+          },
         },
         {
           name: "C++ 学习笔记",
+          handle: () => {
+            console.log("handle2");
+          },
         },
         {
           name: "三国杀华容道",
@@ -144,6 +167,26 @@ export default {
     },
     classMenuItem() {
       return this.isPhone ? 'MenuItem-Phone' : 'MenuItem';
+    },
+    allMenuItems() {
+      return [
+        {
+          name: "最近文章1",
+          items: this.menuItems_One,
+        },
+        {
+          name: "最近文章2",
+          items: this.menuItems_Two,
+        },
+        {
+          name: "最近文章3",
+          items: this.menuItems_Three,
+        },
+        {
+          name: "最近文章4",
+          items: this.menuItems_Four,
+        },
+      ];
     },
   },
   methods: {
