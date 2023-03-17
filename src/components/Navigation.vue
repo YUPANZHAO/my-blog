@@ -19,23 +19,14 @@
       </el-dropdown>
     </div>
     <div class="MenuGroup" style="right:20px" v-else>
-      <el-dropdown :hideOnClick="false">
+      <el-dropdown>
         <img src="https://img1.imgtp.com/2023/03/16/xe3gZxGm.png" style="width:25px;height:20px;outline:none;">
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item v-for="menu in Menus" :key="menu">
-              <el-dropdown>
-                <span style="outline: none;margin-top:5px;margin-bottom:5px;">
-                  {{ menu.name }}
-                </span>
-                <template #dropdown>
-                  <el-dropdown-menu>
-                    <el-dropdown-item v-for="item in menu.items" :key="item" @click="item.handle">
-                      {{ item.name }}
-                    </el-dropdown-item>
-                  </el-dropdown-menu>
-                </template>
-              </el-dropdown>
+            <el-dropdown-item v-for="menu in Menus" :key="menu" @click="menu.handle">
+              <span style="outline: none;">
+                {{ menu.name }}
+              </span>
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>

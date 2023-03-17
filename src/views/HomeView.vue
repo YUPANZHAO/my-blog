@@ -173,10 +173,12 @@ export default {
         {
           name: "最近文章1",
           items: this.menuItems_One,
+          handle: () => { this.isSingleHomePage = true; },
         },
         {
           name: "最近文章2",
           items: this.menuItems_Two,
+          handle: () => { console.log("clicked"); }
         },
         {
           name: "最近文章3",
