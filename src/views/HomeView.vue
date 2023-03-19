@@ -1,16 +1,14 @@
 <template>
   <div class="root">
-    <div class="root-SingleHomePage">
-      <home-page-anima>
-        <NameCard :class="classNameCard" v-if="isSingleHomePage"
+    <home-page-anima>
+      <div class="root-SingleHomePage" v-if="isSingleHomePage">
+        <NameCard :class="classNameCard" 
           AvatarUrl="https://img1.imgtp.com/2023/03/15/Yu7q4P8x.jpg"
           AvatarSize="100px"
           Name="YUPAN ZHAO"
           Description="Huizhou University"
           :IconGroup="iconGroup" />
-      </home-page-anima>
-      <home-page-anima>
-        <div :class="classMenu" v-if="isSingleHomePage">
+        <div :class="classMenu">
           <MenuItem :class="classMenuItem"
             MenuName="最近文章1"
             :Items="menuItems_One" />
@@ -24,8 +22,8 @@
             MenuName="最近文章4"
             :Items="menuItems_Four" />
         </div>
-      </home-page-anima>
-    </div>
+      </div>
+    </home-page-anima>
     <navigation-anima>
       <Navigation class="Navigation" v-if="!isSingleHomePage"
         AvatarUrl="https://img1.imgtp.com/2023/03/15/Yu7q4P8x.jpg"
@@ -295,8 +293,9 @@ export default {
 .Content {
   margin-top: 54px;
   background-color: green;
-  width: 100%;
+  width: calc(100% - 2px);
   position: relative;
+  padding: 1px;
 }
 .PaperList {
   width: 600px;
@@ -304,6 +303,7 @@ export default {
   margin-left: auto;
   margin-right: auto;
   position: relative;
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 </style>
