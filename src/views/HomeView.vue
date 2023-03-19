@@ -35,6 +35,13 @@
         :Menus="allMenuItems"
         :isPhone="isPhone" />
     </navigation-anima>
+    <content-page-anima>
+      <div class="Content" v-if="!isSingleHomePage">
+        <PaperList class="PaperList">
+
+        </PaperList>
+      </div>
+    </content-page-anima>
   </div>
 </template>
 
@@ -44,6 +51,8 @@ import MenuItem from '../components/MenuItem.vue'
 import HomePageAnima from '../components/animate/HomePageAnima.vue'
 import Navigation from '../components/Navigation.vue'
 import NavigationAnima from '../components/animate/NavigationAnima.vue'
+import PaperList from '../components/PaperList.vue'
+import ContentPageAnima from '../components/animate/ContentPageAnima.vue'
 export default {
   components: {
     NameCard,
@@ -51,6 +60,8 @@ export default {
     HomePageAnima,
     Navigation,
     NavigationAnima,
+    PaperList,
+    ContentPageAnima,
   },
   data() {
     return {
@@ -225,6 +236,9 @@ export default {
   height: 100%;
   display: flex;
   justify-content: center;
+  position: fixed;
+  top: 0px;
+  overflow: auto;
 }
 .root {
   width: 100%;
@@ -276,5 +290,20 @@ export default {
   top: 0px;
   background-color: white;
   box-shadow: 0px 0px 10px #c9c9c9;
+  z-index: 1;
+}
+.Content {
+  margin-top: 54px;
+  background-color: green;
+  width: 100%;
+  position: relative;
+}
+.PaperList {
+  width: 600px;
+  max-width: 86%;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  margin-top: 20px;
 }
 </style>
