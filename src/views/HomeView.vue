@@ -292,7 +292,6 @@ export default {
 }
 .Content {
   margin-top: 54px;
-  background-color: green;
   width: calc(100% - 2px);
   position: relative;
   padding: 1px;
