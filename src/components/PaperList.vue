@@ -4,7 +4,7 @@
       <div style="line-height:0;font-size:0;">
         <img class="PictureCover" :src="paper.cover_url">
       </div>
-      <p class="Title"> {{ paper.title }} </p>
+      <p class="Title" @click="onClickedTitle(paper)"> {{ paper.title }} </p>
       <p class="Introduction" v-for="content in paper.introduction" :key="content"> 
         {{ content }} 
       </p>
@@ -35,6 +35,7 @@ export default {
           ],
           date: '2023-03-19',
           category: '算法',
+          link: '/paper',
         },
         {
           title: '牛客练习赛 第91场 魔法学院(hard version) 并查集 + 双向链表',
@@ -44,10 +45,16 @@ export default {
           ],
           date: '2023-03-19',
           category: '算法',
+          link: '/paper',
         },
       ],
       
     }
+  },
+  methods: {
+    onClickedTitle(data) {
+      this.$router.push( { name: 'paper' } );
+    },
   },
 }
 </script>

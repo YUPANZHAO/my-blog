@@ -171,10 +171,15 @@ export default {
       this.screenHeight = window.innerHeight;
     },
     backToHome() {
-      this.$router.go(-1);
+      if(window.history.state.back) {
+        this.$router.go(-1);
+      }else {
+        this.$router.replace({ path: '/' });
+      }
     },
   },
   mounted() {
+    window.scrollTo(0,0);
     this.windowSizeChange();
     window.onresize = () => {
       if(!this.timer) {

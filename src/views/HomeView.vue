@@ -209,7 +209,7 @@ export default {
       this.isSingleHomePage = true;
     }
   },
-  mounted() {
+  activated() {
     this.windowSizeChange();
     window.onresize = () => {
       if(!this.timer) {
@@ -222,7 +222,7 @@ export default {
       }
     };
   },
-  destroyed() {
+  deactivated() {
     window.onresize = null;
   },
 }
