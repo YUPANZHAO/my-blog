@@ -20,4 +20,7 @@ body {
   margin: 0;
   padding: 0;
 }
+.github-markdown-body {
+  padding: 25px !important;
+}
 </style>

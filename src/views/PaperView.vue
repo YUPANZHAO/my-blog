@@ -38,9 +38,7 @@
             </div>
           </div>
         </div>
-        <div class="MarkDownContent">
-          
-        </div>
+        <v-md-preview class="MarkDownContent" :text="paperData.content"></v-md-preview>
       </div>
     </div>
   </div>
@@ -126,7 +124,7 @@ export default {
         category: '算法',
         // cover_url: '',
         cover_url: 'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/06/ChMkJlbKyeCIC-SBABiE33zZm4wAALITwH7uzwAGIT3484.jpg',
-        content: '',
+        content: '# 一级标题\n\n## 二级标题\n\n### 三级标题\n\n#### 四级标题\n\n##### 五级标题\n\n`tip`\n\n`print(\'Hello World!\')`',
       },
     }
   },
@@ -329,7 +327,6 @@ export default {
 }
 .MarkDownContent {
   width: 100%;
-  height: 800px;
   background-color: white;
   position: relative;
 }
