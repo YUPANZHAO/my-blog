@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import { getArticle } from '../api/getArticle.js'
 export default {
   data() {
     return {
@@ -119,12 +120,11 @@ export default {
         },
       ],
       paperData: {
-        title: '牛客练习赛 第91场 魔法学院(hard version) 并查集 + 双向链表',
-        date: '2023-03-19',
-        category: '算法',
-        // cover_url: '',
-        cover_url: 'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/06/ChMkJlbKyeCIC-SBABiE33zZm4wAALITwH7uzwAGIT3484.jpg',
-        content: '# 一级标题\n\n## 二级标题\n\n### 三级标题\n\n#### 四级标题\n\n##### 五级标题\n\n`tip`\n\n`print(\'Hello World!\')`',
+        title: '',
+        date: '',
+        category: '',
+        cover_url: '',
+        content: '',
       },
     }
   },
@@ -175,6 +175,14 @@ export default {
         this.$router.replace({ path: '/' });
       }
     },
+    async initData() {
+      var reply = await getArticle({
+        "name": this.$route.query.paperName
+      })
+      if(reply.status == 200) {
+        this.paperData = reply.data
+      }
+    },
   },
   mounted() {
     window.scrollTo(0,0);
@@ -189,6 +197,7 @@ export default {
         }, 400);
       }
     };
+    this.initData();
   },
   destroyed() {
     window.onresize = null;
@@ -259,21 +268,22 @@ export default {
   font-size: 5vmin;
 }
 .InfoGroup {
+  width: 100%;
   position: absolute;
   transform: translateY(-100%);
 }
 .InfoGroup-NoCover {
-  
+  width: 100%;
 }
 .IconGroup {
-  width: 200px;
+  width: 80%;
   height: 26px;
   margin-bottom: 5px;
   margin-left: 25px;
-  display: flex;
+  display: flex;  
 }
 .IconGroup-NoCover {
-  width: 200px;
+  width: 80%;
   height: 26px;
   margin-left: 25px;
   display: flex;

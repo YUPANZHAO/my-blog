@@ -28,5 +28,13 @@ export default defineConfig({
     port: 8080,
     // 是否开启 https
     https: false,
+    proxy: {
+      "/api": {
+        target: "http://172.17.0.2:8081/",
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
   }
 })

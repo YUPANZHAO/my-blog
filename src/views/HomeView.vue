@@ -34,7 +34,7 @@
         :isPhone="isPhone" />
     </navigation-anima>
     <content-page-anima>
-      <div class="Content" v-if="!isSingleHomePage">
+      <div class="Content" v-show="!isSingleHomePage">
         <PaperList class="PaperList">
 
         </PaperList>

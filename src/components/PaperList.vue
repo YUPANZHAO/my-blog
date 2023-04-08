@@ -23,38 +23,33 @@
 </template>
 
 <script>
+import { getArticleList } from '../api/getArticleList.js'
 export default {
   data() {
     return {
-      papers: [
-        {
-          title: '牛客练习赛 第91场 魔法学院(hard version) 并查集 + 双向链表',
-          cover_url: 'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/06/ChMkJlbKyeCIC-SBABiE33zZm4wAALITwH7uzwAGIT3484.jpg',
-          introduction: [
-            '本文通过牛客练习赛中的一题介绍并查集与链表的结合用法，解决区间覆盖问题，能有效降低时间复杂度。',
-          ],
-          date: '2023-03-19',
-          category: '算法',
-          link: '/paper',
-        },
-        {
-          title: '牛客练习赛 第91场 魔法学院(hard version) 并查集 + 双向链表',
-          cover_url: 'https://desk-fd.zol-img.com.cn/t_s960x600c5/g5/M00/02/06/ChMkJlbKyeCIC-SBABiE33zZm4wAALITwH7uzwAGIT3484.jpg',
-          introduction: [
-            '本文通过牛客练习赛中的一题介绍并查集与链表的结合用法，解决区间覆盖问题，能有效降低时间复杂度。',
-          ],
-          date: '2023-03-19',
-          category: '算法',
-          link: '/paper',
-        },
-      ],
-      
+      papers: [],
     }
   },
   methods: {
     onClickedTitle(data) {
-      this.$router.push( { name: 'paper' } );
+      this.$router.push( { 
+        name: 'paper', 
+        query: {
+          paperName: data.name,
+        },
+      });
     },
+    async initData() {
+      var reply = await getArticleList({
+        "category": '',
+      })
+      if(reply.status == 200) {
+        this.papers = reply.data.articles
+      }
+    },
+  },
+  mounted() {    
+    this.initData()
   },
 }
 </script>
