@@ -97,7 +97,7 @@ export default {
         {
           name: "最近文章",
           items: this.recentArticle(),
-          handle: () => { this.isSingleHomePage = true; },
+          handle: () => { this.returnTop() },
         },
       ],
       NavigationMenus: [
@@ -127,6 +127,11 @@ export default {
     },
     backToHome() {
       this.isSingleHomePage = true;
+    },
+    returnTop() {
+      document.body.scrollTop = 0
+      // firefox
+      document.documentElement.scrollTop = 0
     },
     async recentArticle(max_num) {
       var reply = await getRecentArticle({
