@@ -20,6 +20,10 @@ VMdPreview.use(vuepressTheme, {
     // md.set(option).use(plugin);
   },
 });
+// 代码复制
+import createCopyCodePlugin from '@kangc/v-md-editor/lib/plugins/copy-code/index';
+import '@kangc/v-md-editor/lib/plugins/copy-code/copy-code.css';
+VMdPreview.use(createCopyCodePlugin());
 
 const app = createApp(App)
 
