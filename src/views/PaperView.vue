@@ -112,6 +112,7 @@ export default {
       ElMessage({
         message: '代码复制成功 🍻',
         type: 'success',
+        grouping: true,
       })
     },
   },
