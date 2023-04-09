@@ -38,7 +38,7 @@
             </div>
           </div>
         </div>
-        <v-md-preview class="MarkDownContent" :text="paperData.content"></v-md-preview>
+        <v-md-preview class="MarkDownContent" :text="paperData.content" @copy-code-success="codeCopySuccess"></v-md-preview>
       </div>
     </div>
   </div>
@@ -107,6 +107,12 @@ export default {
       if(reply.status == 200) {
         this.paperData = reply.data
       }
+    },
+    codeCopySuccess(code) {
+      ElMessage({
+        message: '代码复制成功 🍻',
+        type: 'success',
+      })
     },
   },
   mounted() {
