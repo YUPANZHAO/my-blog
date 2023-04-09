@@ -100,9 +100,6 @@ export default {
           handle: () => { this.returnTop() },
         },
       ],
-      NavigationMenus: [
-
-      ],
       isSingleHomePage: true,
     }
   },
