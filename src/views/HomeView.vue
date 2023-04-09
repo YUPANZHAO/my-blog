@@ -9,18 +9,11 @@
           Description="Huizhou University"
           :IconGroup="iconGroup" />
         <div :class="classMenu">
-          <MenuItem :class="classMenuItem"
-            MenuName="最近文章1"
-            :Items="menuItems_One" />
-          <MenuItem :class="classMenuItem"
-            MenuName="最近文章2"
-            :Items="menuItems_Two" />
-          <MenuItem :class="classMenuItem"
-            MenuName="最近文章3"
-            :Items="menuItems_Three" />
-          <MenuItem :class="classMenuItem"
-            MenuName="最近文章4"
-            :Items="menuItems_Four" />
+          <MenuItem v-for="menu in menuItems" :key="menu" 
+            :class="classMenuItem"
+            :MenuName="menu.name"
+            :Items="menu.items"
+            />
         </div>
       </div>
     </home-page-anima>
@@ -30,7 +23,7 @@
         AvatarSize="36px"
         Name="YUPAN ZHAO' BLOG"
         :BackToHomeHandle=backToHome
-        :Menus="allMenuItems"
+        :Menus="menuItems"
         :isPhone="isPhone" />
     </navigation-anima>
     <content-page-anima>
@@ -51,6 +44,7 @@ import Navigation from '../components/Navigation.vue'
 import NavigationAnima from '../components/animate/NavigationAnima.vue'
 import PaperList from '../components/PaperList.vue'
 import ContentPageAnima from '../components/animate/ContentPageAnima.vue'
+import { getRecentArticle } from '../api/getRecentArticle.js'
 export default {
   components: {
     NameCard,
@@ -81,85 +75,33 @@ export default {
           hint: "个人博客",
         },
       ],
-      menuItems_One: [
+      menuItems: [
         {
-          name: "基于 RTMP 协议实现的家庭监控系统",
-          handle: () => {
-            this.isSingleHomePage = !this.isSingleHomePage;
-          },
+          name: "导航",
+          items: [
+            {
+              name: "首页",
+              handle: () => {
+                this.isSingleHomePage = true;
+              },
+            },
+            {
+              name: "文章列表",
+              handle: () => {
+                this.isSingleHomePage = false;
+              },
+            },
+          ],
+          handle: () => { this.isSingleHomePage = true; },
         },
         {
-          name: "C++ 学习笔记",
-          handle: () => {
-            console.log("handle2");
-          },
-        },
-        {
-          name: "三国杀华容道",
-        },
-        {
-          name: "📝记账APP",
-        },
-      ],
-      menuItems_Two: [
-        {
-          name: "基于 RTMP 协议实现的家庭监控系统",
-          handle: () => {
-            this.isSingleHomePage = !this.isSingleHomePage;
-          },
-        },
-        {
-          name: "C++ 学习笔记",
-          handle: () => {
-            console.log("handle2");
-          },
-        },
-        {
-          name: "三国杀华容道",
-        },
-        {
-          name: "📝记账APP",
+          name: "最近文章",
+          items: this.recentArticle(),
+          handle: () => { this.isSingleHomePage = true; },
         },
       ],
-      menuItems_Three: [
-        {
-          name: "基于 RTMP 协议实现的家庭监控系统",
-          handle: () => {
-            this.isSingleHomePage = !this.isSingleHomePage;
-          },
-        },
-        {
-          name: "C++ 学习笔记",
-          handle: () => {
-            console.log("handle2");
-          },
-        },
-        {
-          name: "三国杀华容道",
-        },
-        {
-          name: "📝记账APP",
-        },
-      ],
-      menuItems_Four: [
-        {
-          name: "基于 RTMP 协议实现的家庭监控系统",
-          handle: () => {
-            this.isSingleHomePage = !this.isSingleHomePage;
-          },
-        },
-        {
-          name: "C++ 学习笔记",
-          handle: () => {
-            console.log("handle2");
-          },
-        },
-        {
-          name: "三国杀华容道",
-        },
-        {
-          name: "📝记账APP",
-        },
+      NavigationMenus: [
+
       ],
       isSingleHomePage: true,
     }
@@ -177,28 +119,6 @@ export default {
     classMenuItem() {
       return this.isPhone ? 'MenuItem-Phone' : 'MenuItem';
     },
-    allMenuItems() {
-      return [
-        {
-          name: "最近文章1",
-          items: this.menuItems_One,
-          handle: () => { this.isSingleHomePage = true; },
-        },
-        {
-          name: "最近文章2",
-          items: this.menuItems_Two,
-          handle: () => { console.log("clicked"); }
-        },
-        {
-          name: "最近文章3",
-          items: this.menuItems_Three,
-        },
-        {
-          name: "最近文章4",
-          items: this.menuItems_Four,
-        },
-      ];
-    },
   },
   methods: {
     windowSizeChange() {
@@ -207,7 +127,30 @@ export default {
     },
     backToHome() {
       this.isSingleHomePage = true;
-    }
+    },
+    async recentArticle(max_num) {
+      var reply = await getRecentArticle({
+        "max_num": max_num,
+      })
+      var ret = []
+      if(reply.status == 200) {
+        for (let i = 0; i < reply.data.recent_articles.length; i++) { 
+          ret.push({
+            name: reply.data.recent_articles[i].title,
+            handle: () => {
+              this.$router.push( { 
+                name: 'paper', 
+                query: {
+                  paperName: reply.data.recent_articles[i].name,
+                },
+              });
+            },
+          })
+        }
+      }
+      this.menuItems[1].items = ret
+      return ret
+    },
   },
   activated() {
     this.windowSizeChange();

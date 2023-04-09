@@ -5,7 +5,7 @@
       AvatarSize="36px"
       Name="YUPAN ZHAO' BLOG"
       :BackToHomeHandle=backToHome
-      :Menus="allMenuItems"
+      :Menus="menuItems"
       :isPhone="isPhone" />
     <div class="Content">
       <div :class="ClassPaper">
@@ -51,72 +51,18 @@ export default {
     return {
       screenWidth: window.innerWidth,
       screenHeight: window.innerHeight,
-      menuItems_One: [
+      menuItems: [
         {
-          name: "基于 RTMP 协议实现的家庭监控系统",
-          handle: () => {
-            console.log("handle1");
-          },
-        },
-        {
-          name: "C++ 学习笔记",
-        },
-        {
-          name: "三国杀华容道",
-        },
-        {
-          name: "📝记账APP",
-        },
-      ],
-      menuItems_Two: [
-        {
-          name: "基于 RTMP 协议实现的家庭监控系统",
-          handle: () => {
-            console.log("handle1");
-          },
-        },
-        {
-          name: "C++ 学习笔记",
-        },
-        {
-          name: "三国杀华容道",
-        },
-        {
-          name: "📝记账APP",
-        },
-      ],
-      menuItems_Three: [
-        {
-          name: "基于 RTMP 协议实现的家庭监控系统",
-          handle: () => {
-            console.log("handle1");
-          },
-        },
-        {
-          name: "C++ 学习笔记",
-        },
-        {
-          name: "三国杀华容道",
-        },
-        {
-          name: "📝记账APP",
-        },
-      ],
-      menuItems_Four: [
-        {
-          name: "基于 RTMP 协议实现的家庭监控系统",
-          handle: () => {
-            console.log("handle1");
-          },
-        },
-        {
-          name: "C++ 学习笔记",
-        },
-        {
-          name: "三国杀华容道",
-        },
-        {
-          name: "📝记账APP",
+          name: "导航",
+          items: [
+            {
+              name: "回到首页",
+              handle: () => {
+                this.$router.replace({ path: '/' });
+              },
+            },
+          ],
+          handle: () => { this.$router.replace({ path: '/' }); },
         },
       ],
       paperData: {
@@ -131,27 +77,6 @@ export default {
   computed: {
     isPhone() {
       return this.screenHeight / this.screenWidth > 0.6 || this.screenWidth <= 850;
-    },
-    allMenuItems() {
-      return [
-        {
-          name: "最近文章1",
-          items: this.menuItems_One,
-          handle: () => { console.log("clicked"); }
-        },
-        {
-          name: "最近文章2",
-          items: this.menuItems_Two,
-        },
-        {
-          name: "最近文章3",
-          items: this.menuItems_Three,
-        },
-        {
-          name: "最近文章4",
-          items: this.menuItems_Four,
-        },
-      ];
     },
     ClassTitle() {
       return this.paperData.cover_url == '' ? 'Title-NoCover' : 'Title';
